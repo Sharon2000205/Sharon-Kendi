@@ -76,15 +76,15 @@ enableEmoji = true
   [[params.social]]
       icon      = "github" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://github.com/Kigke"
+      url       = ""
   [[params.social]]
       icon      = "facebook-square" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.facebook.com/kigenkevin46/"
+      url       = ""
   [[params.social]]
       icon      = "instagram" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.instagram.com/kigen_ke/"
+      url       = ""
   [[params.social]]
       icon      = "twitter" # icon name without the 'fa-'
       icon_pack = "fab"
@@ -92,7 +92,7 @@ enableEmoji = true
    [[params.social]]
       icon      = "linkedin" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.linkedin.com/in/kelvin-kiprono/"
+      url       = ""
   [[params.social]]
       icon      = "envelope" # icon name without the 'fa-'
       icon_pack = "fas"
