@@ -4,7 +4,7 @@ subtitle: "Getting Started with ggplot2 in R"
 excerpt: "ggplot2 is an R package widely used for data visualization. Created by Hadley Wickham, it implements the Grammar of Graphics, which allows users to create complex multi-layered graphics by building them step-by-step. With ggplot2, you can create a wide range of visualizations, from simple scatter plots and bar charts to complex faceted plots."
  
 date: 2024-09-15
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 images:
 series:

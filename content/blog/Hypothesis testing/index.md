@@ -3,7 +3,7 @@ title: "Hypothesis Testing"
 subtitle: ""
 excerpt: "Hypothesis testing is a statistical method used to determine if there is enough evidence to reject a null hypothesis (H0) in favor of an alternative hypothesis (𝐻𝑎 ). By analyzing sample data, the process involves setting a significance level, calculating a test statistic, and comparing it to a critical value or P-value to make data-driven decisions. Common tests include t-tests, z-tests, and chi-square tests, applied in diverse fields to validate assumptions and drive conclusions."
 date: 2024-11-29
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 # layout options: single, single-sidebar
 layout: single

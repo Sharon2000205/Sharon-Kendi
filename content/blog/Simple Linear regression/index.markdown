@@ -3,7 +3,7 @@ title: "Simple Linear Regression"
 subtitle: ""
 excerpt: "Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. Its main goal is to find the best-fitting linear equation that can predict the dependent variable based on the independent variables."
 date: 2024-09-24
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 # layout options: single, single-sidebar
 layout: single
