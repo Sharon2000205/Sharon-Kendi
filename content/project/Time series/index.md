@@ -3,7 +3,7 @@ title: "Time Series Analysis"
 subtitle: ""
 excerpt: ""
 date: 2024-09-10
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 tags:
   - Statistical Data Analysis

@@ -3,7 +3,7 @@ title: "Exploring Air Quality in New York: A Predictive Analysis of Ozone Levels
 subtitle: ""
 excerpt: ""
 date: 2024-09-12
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 tags:
 - Statistical Data Analysis

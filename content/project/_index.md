@@ -1,7 +1,7 @@
 ---
-title: Kelvin Kiprono Projects
+title: Sharon Kendi Projects
 description: "Your project will always be better if you share your ideas and collaborate."
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 show_post_thumbnail: true
 show_author_byline: true
 show_post_date: false

@@ -3,7 +3,7 @@ title: "Visual Exploration of the Diamonds Dataset Using ggplot2 in R"
 subtitle: ""
 excerpt: "This analysis explores the popular diamonds dataset using the versatile ggplot2 package in R. Through a variety of visualizations—such as histograms, scatter plots, boxplots, and heatmaps—it reveals insights into diamond attributes like price, carat, cut, clarity, and their relationships. The study provides an intuitive understanding of the data, highlighting key trends and patterns, such as price distribution, the influence of carat size on cost, and variations across quality grades."
 date: 2024-11-25
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 tags:
 - Statistical Data Analysis

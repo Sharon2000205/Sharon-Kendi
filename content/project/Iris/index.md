@@ -3,7 +3,7 @@ title: "Exploring the Iris Dataset: A Visual Analysis of Sepal and Petal Charact
 subtitle: ""
 excerpt: "In this analysis, we use ggplot2 in R to visually explore how the sepal and petal dimensions vary across species. Through various plots, including scatter plots, box plots, and histograms, we aim to identify trends, correlations, and the distribution of these measurements, providing a deeper understanding of the iris flowers' physical characteristics and how they differ between species."
 date: 2024-11-12
-author: "Kelvin Kiprono"
+author: "Sharon Kendi"
 draft: false
 tags:
 - Statistical Data Analysis
