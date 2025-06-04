@@ -2,7 +2,7 @@
 title: Statistical Data Analysis using R
 description: |
   R is a powerful statistical programming language used for data analysis, visualization, and modeling. Its flexibility and rich package ecosystem make it ideal for everything from basic summaries to complex analytics. In this blog, I'll explore practical ways to use R for insightful data analysis and data-driven decisions..
-author: Sharon Kendi
+author: "Sharon Kendi"
 show_post_thumbnail: true
 show_author_byline: true
 show_post_date: true
