@@ -1,0 +1,366 @@
+---
+title: "Disaggregated data from surveys"
+subtitle: "How to analyze survey data."
+excerpt: ""
+date: 2024-10-24
+author: "Kelvin Kiprono"
+draft: false
+# layout options: single, single-sidebar
+layout: single
+categories:
+- R Data Analysis
+---
+
+
+Disaggregated data from surveys involves breaking down survey responses into smaller, more specific groups based on different characteristics or categories. This allows for more detailed analysis and helps to identify patterns, trends, or disparities that may not be visible in the aggregated data. The process of disaggregation can reveal important insights, particularly when working with diverse populations or when the goal is to make data-driven decisions that are inclusive and representative of different groups.
+
+### How Disaggregated Data is Created from Surveys
+
+- Survey Design:
+
+Before collecting data, the survey needs to be designed with questions that allow for the segmentation of responses. These questions should ask for variables that can be categorized, such as age, gender, region, or income.
+
+- Data Collection:
+
+During data collection, responses are recorded in a way that each respondent's answers can be associated with specific demographic or other contextual variables.
+
+- Data Segmentation:
+
+After the survey is completed, the data is analyzed by dividing it into sub-groups. This can be done by categorizing respondents according to different criteria:
+  - Demographic Variables: Age, gender, ethnicity, education, occupation, etc.
+  - Geographic Variables: Region, urban vs. rural, country, etc.
+  - Behavioral Variables: Employment status, health behaviors, or purchasing patterns.
+
+- Analysis of Disaggregated Data:
+
+Once the data is segmented, it is analyzed to reveal how different groups within the survey sample respond to specific questions. This allows for comparisons to be made between groups. For example, you might compare how men and women responded to a question on workplace satisfaction or how different income groups feel about healthcare access.
+
+## Examples of Disaggregated Data from Surveys
+
+- Income and Education Level in a Survey about Access to Technology:
+
+   - Aggregated Data: 70% of survey respondents report having access to a computer.
+   - Disaggregated Data:
+   
+     - 85% of individuals with a high school education or less report having access to a computer.
+     - 95% of individuals with a college degree or higher report having access to a computer.
+     - 60% of respondents with an annual income under $20,000 report having access to a computer, while 80% of those earning above $50,000 have access.
+
+## Why Disaggregate Survey Data?
+
+- Identifying Inequalities and Disparities:
+
+Disaggregation allows you to identify differences between groups that might not be evident in the overall data. For example, if there are significant gaps in satisfaction between men and women, or if rural populations have less access to services, this can inform targeted interventions.
+
+- Targeted Decision Making:
+
+Policy makers and businesses can use disaggregated data to make decisions that are more specific to the needs of certain groups. For instance, a government might use disaggregated survey data on healthcare to allocate more resources to underserved areas.
+
+- Improving Program Design:
+
+Disaggregated data helps organizations tailor their programs to meet the needs of specific sub-groups. For example, a nonprofit working on educational programs might disaggregate data by age or socioeconomic status to design programs that address the unique challenges of different populations.
+
+- Transparency and Accountability:
+
+Disaggregation can help ensure that all groups, especially marginalized or underrepresented populations, are considered in the data analysis and that they are not overlooked in decision-making processes.
+
+## Common Variables for Disaggregation in Survey Data
+- Demographic Variables: Age, gender, income level, educational attainment, family status.
+- Geographic Variables: Urban vs. rural, region, country, neighborhood.
+- Health and Disability Variables: Chronic conditions, disability status.
+- Ethnic or Cultural Background: Race, ethnicity, or cultural affiliation.
+- Socioeconomic Variables: Employment status, income level, job sector.
+
+
+## Preparing data for analysis
+
+```{r}
+library(readxl)
+sample_data_1<- read_excel("C:/Users/hp/Downloads/sample_data_1_1_.xlsx")
+```
+
+## Exploring the data
+```{r}
+library(tidyverse)
+library(dplyr)
+library(haven)
+```
+Using glimpse form the dplyr package we are able to see how our data looks like.Also using head() and tail() we can see the first five rows and last 5 rows.
+
+```{r}
+glimpse(sample_data_1)
+head(sample_data_1,5)
+tail(sample_data_1,5)
+```
+
+Obtaining the summary to get the picture of our data
+
+```{r}
+summary(sample_data_1)
+```
+
+## Sample sizes for education subgroup
+
+```{r}
+sample_data_1 %>%
+  group_by(v149) %>%
+  summarise(n())
+```
+
+## Sample sizes and proportion of records for education subgroup
+
+```{r}
+sample_data_1 %>%
+  group_by(v149) %>%
+  summarise(n = n()) %>%
+  mutate(p = n/sum(n))
+```
+
+## Constructing health indicators (skilled birth attendance)
+```{r}
+sample_data_1a <- sample_data_1 %>%
+  mutate(sba =
+           if_else(m3a == "yes"|
+                   m3b == "yes"|
+                   m3c == "yes"|
+                   m3d == "yes",
+                   1,0)
+         )
+```
+
+# Tabulate *sba* variable (skilled birth attendance)
+```{r}
+count(sample_data_1a, sba)
+```
+
+# # Replacing missing values in *sba* with zeros and inspecting results
+```{r}
+sample_data_1b <- sample_data_1a %>%
+  mutate(sba =
+           if_else(m3a == "yes"|
+                   m3b == "yes"|
+                   m3c == "yes"|
+                   m3d == "yes",
+                   1,0,0)
+         )
+count(sample_data_1b, sba)
+```
+
+# Inspecting R objects
+```{r}
+sample_data_1b
+head(sample_data_1b$sba , n = 10)
+```
+
+## Constructing inequality dimensions
+
+# Mother's age categories (variable v012)
+```{r}
+summary(sample_data_1b$v012)
+sample_data_1c <- sample_data_1b %>%
+  mutate(mage =
+           as.factor(case_when(
+             v012 < 20 ~ '15-19 years',
+             v012 >= 20 & v012 <= 34 ~ '20-34 years',
+             v012 >= 35 & v012 <= 49 ~ '35-49 years')
+           )
+  )
+
+levels(sample_data_1c$mage)
+
+count(sample_data_1c, mage)
+```
+
+## Socioeconomic status (variable v190)
+```{r}
+sample_data_1d <- sample_data_1c %>%
+  mutate(quintile =
+           fct_recode(v190,
+                      "Quintile 1 (poorest)" = "poorest",
+                      "Quintile 2" = "poorer",
+                      "Quintile 3" = "middle",
+                      "Quintile 4" = "richer",
+                      "Quintile 5 (richest)" = "richest")
+  )
+
+count(sample_data_1d, quintile)
+```
+## Mother's education (variable v149)
+```{r}
+count(sample_data_1d, v149)
+sample_data_1e <- sample_data_1d %>%
+  mutate(educatt =
+           fct_recode(v149,
+                      "No or primary education" = "no education",
+                      "No or primary education" = "incomplete primary",
+                      "No or primary education" = "complete primary",
+                      "Secondary or higher education" = "incomplete secondary",
+                      "Secondary or higher education" = "complete secondary",
+                      "Secondary or higher education" = "higher")
+  )
+
+count(sample_data_1e, educatt)
+```
+
+## Place of residence (variable v025)
+
+```{r}
+sample_data_1f <- sample_data_1e %>%
+  mutate(urban =
+           fct_recode(v025,
+                      "Urban" = "urban",
+                      "Rural" = "rural")
+  )
+
+count(sample_data_1f, urban)
+```
+## Finalizing data object preparation by selecting specified variables
+
+```{r}
+sample_data_2 <- sample_data_1f %>%
+  select(psu,
+         weight,
+         strata,
+         sba,
+         mage,
+         quintile,
+         educatt,
+         urban)
+```
+
+## Calculating disaggregated estimates using R
+
+```{r}
+library(survey)
+```
+
+# Specifying complex survey design using svydesign() function
+```{r}
+sample_data_2_design <- svydesign(id = ~ psu,
+                                  weights = ~ weight,
+                                  strata = ~ strata,
+                                  data = sample_data_2)
+
+summary(sample_data_2_design)
+```
+## Calculating  national averages and corresponding confidence intervals using svymean
+
+```{r}
+svymean1 <- svymean(~ sba,
+                    design = sample_data_2_design)
+
+confint(svymean1)
+```
+
+# Calculating national averages and corresponding confidencce intervals using svyciprop
+
+```{r}
+svyciprop(~ sba,
+          design = sample_data_2_design)
+```
+
+## Calculating disaggregated estimates for *sba* by wealth quintile
+```{r}
+svyby(~ sba,
+      by = ~ quintile,
+      design = sample_data_2_design,
+      FUN = svymean,
+      vartype = c("se", "ci"),
+      keep.names = F)
+```
+## Calculating disaggregated estimates for *sba* by education level
+```{r}
+svyby(~ sba,
+      by = ~ educatt,
+      design = sample_data_2_design,
+      FUN = svymean,
+      vartype = c("se", "ci"),
+      keep.names = F)
+```
+## Calculating disaggregated estimates for *sba* by place of residence
+```{r}
+svyby(~ sba,
+      by = ~ urban,
+      design = sample_data_2_design,
+      FUN = svymean,
+      vartype = c("se", "ci"),
+      keep.names = F)
+```
+## Calculating disaggregated estimates for a specific subgroup (e.g. urban areas)
+```{r}
+urban_subset_design <- subset(sample_data_2_design, urban == 'Urban')
+
+urban_subset_calc <- svyby(~ sba,
+                           by = ~ urban,
+                           design = urban_subset_design,
+                           FUN = svymean,
+                           vartype = c("se", "ci"),
+                           keep.names = F)
+
+urban_subset_calc
+```
+## Disaggregation by two dimensions of inequality (double disaggregation)
+```{r}
+svyby(~ sba,
+      by = ~ urban + educatt,
+      design = sample_data_2_design,
+      FUN = svymean,
+      vartype = c("se", "ci"),
+      keep.names = F)
+```
+# Unweighted sample size
+```{r}
+nrow(sample_data_2)
+```
+# Unweighted sample sizes for dimension of inequality subgroups
+```{r}
+count(sample_data_2, quintile)
+```
+# National average weighted population sizes
+```{r}
+sample_data_2 <- sample_data_2 %>%
+  mutate(size = 1)
+```
+```{r}
+sample_data_2_design <- svydesign(id = ~ psu,
+                                  weights = ~ weight,
+                                  strata = ~ strata,
+                                  data = sample_data_2)
+
+svytotal(~ size,
+         design = sample_data_2_design)
+```
+# Weighted population sizes for dimension of inequality subgroups
+```{r}
+sba_urban <- svyby(~ sba,
+                   by = ~ urban,
+                   design = sample_data_2_design,
+                   FUN = svymean,
+                   vartype = c("se", "ci")
+                   )
+```
+
+
+## Creating a function to calculate disaggregated estimates for several dimensions of inequality
+```{r}
+svyby_disaggregated <- function(variables){
+  svyby(~ sba,
+        by = reformulate(variables),
+        design = sample_data_2_design,
+        FUN = svymean,
+        vartype = c("se", "ci"),
+        keep.names = F)
+}
+```
+## Identify list of dimension of inequality variables
+```{r}
+variables <- c('urban', 'quintile', 'educatt', 'mage')
+```
+
+## Apply function svyby_disaggregated() to list of dimension of inequality variables
+```{r}
+lapply(variables, svyby_disaggregated)
+```
+## Conclusion
+
+In summary, disaggregated data from surveys enables more in-depth analysis and understanding, leading to more informed decisions, targeted interventions, and fairer policies.

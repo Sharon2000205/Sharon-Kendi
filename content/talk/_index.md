@@ -1,5 +1,5 @@
 ---
-title: Talks that Last
+title: Data Analysis
 description: |
   This is a list for your talks, workshops, or other events with a time, date, and place.
 author: "The R Markdown Team @RStudio"

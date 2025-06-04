@@ -1,0 +1,127 @@
+---
+title: "ggplot2"
+subtitle: "Getting Started with ggplot2 in R"
+excerpt: "ggplot2 is an R package widely used for data visualization. Created by Hadley Wickham, it implements the Grammar of Graphics, which allows users to create complex multi-layered graphics by building them step-by-step. With ggplot2, you can create a wide range of visualizations, from simple scatter plots and bar charts to complex faceted plots."
+ 
+date: 2024-09-15
+author: "Kelvin Kiprono"
+draft: false
+images:
+series:
+tags:
+categories:
+- ggplot2
+layout: single
+---
+
+ggplot2 is one of the most popular data visualization packages in R, known for its versatility and ease of creating beautiful, complex graphics. It’s built on the "grammar of graphics" concept, which provides a logical structure for building a plot in layers. Whether you're new to data visualization or experienced in R, ggplot2 offers an intuitive and powerful approach to creating plots.
+
+## Key Components of ggplot2
+
+The grammar of graphics in ggplot2 consists of several components:
+
+- Data: The dataset you want to plot.
+- Aesthetics (aes): Mappings that define how data variables are visualized, such as x and y coordinates, colors, shapes, and sizes.
+- Geometries (geom): The type of plot (e.g., points, lines, bars).
+- Facets: Separate plots by subsets of data (e.g., different panels for each group).
+- Statistics (stat): Representations of data summaries (e.g., counts, averages).
+- Coordinates (coord): Control the mapping of data to the plotting space.
+- Themes: Adjust the non-data elements, such as text, axes, backgrounds, and colors.
+
+We are going to explore the penguins data from the palmerpenguins package.
+
+## Loading dataset
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+```
+```{r}
+head(penguins,5)
+```
+```{r}
+tail(penguins,5)
+```
+```{r}
+levels(penguins$species)
+```
+```{r}
+levels(penguins$sex)
+count(penguins,sex)
+```
+First, you need to install and load ggplot2
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ggplot(penguins,aes(flipper_length_mm,body_mass_g,colour = sex)) +
+  geom_point() + 
+  geom_smooth(method='lm')+
+  theme_minimal()+
+  ggthemes::theme_tufte() +
+  ggtitle("Relationship between flipper_length and body mass based on sex")
+```
+- The plot shows relationship between flipper_length and body mass differentiated by sex.
+
+- ggplot2 allows for extensive customization through themes. Use theme_minimal(), theme_classic(), or other themes to change the appearance, or customize individual elements with theme()
+
+- ggthemes:: theme_tufte() removes the unnecessary background grids and colours.
+
+
+```{r}
+ggplot(penguins,aes(flipper_length_mm,body_mass_g)) +
+  geom_point() + 
+  geom_smooth(method='lm')+
+  facet_wrap(~sex)+
+  theme_minimal()+
+  ggthemes::theme_tufte() +
+  ggtitle("Relationship between flipper_length and body mass based on sex")
+```
+
+```{r}
+library(plotly)
+```
+Plotly is an interactive graphing library for R that makes it easy to create interactive, web-ready visualizations. It is particularly useful for exploring data, sharing findings, and building dashboards with enhanced user experiences.
+
+```{r}
+relationship <- ggplot(penguins,aes(flipper_length_mm,body_mass_g,colour = sex)) +
+  geom_point() + 
+  geom_smooth(method='lm')+
+  theme_minimal()+
+  ggthemes::theme_tufte() +
+  ggtitle("Relationship between flipper_length and body mass based on sex")
+```
+
+
+```{r}
+ggplotly(relationship)
+```
+
+```{r}
+ggplot(data = penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(aes(fill = species), alpha = 0.5, position = "identity") +
+  scale_fill_manual(values = c("darkorange","darkorchid","cyan4"))
+```
+
+
+
+
+
+```{r}
+Flipper <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(aes(fill = species), alpha = 0.5, position = "identity") +
+  scale_fill_manual(values = c("darkorange","darkorchid","cyan4"))
+```
+
+
+```{r}
+ggplotly(Flipper)
+```
+## Conclusion
+
+With its layered grammar approach, ggplot2 is ideal for creating both basic and complex visualizations. It’s an essential package for anyone working with data in R and is highly flexible, enabling users to convey insights effectively with minimal code. Try experimenting with different geoms, facets, and themes to unlock the full potential of your data visualizations!
+
+
+

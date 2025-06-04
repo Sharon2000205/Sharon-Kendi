@@ -1,0 +1,118 @@
+---
+title: "Data Manipulation using tidyverse and dplyr"
+weight: 3
+subtitle: ""
+excerpt: "Data manipulation is a crucial step in data analysis, and R offers powerful packages like dplyr and tidyverse to simplify this process. These packages provide intuitive functions for filtering, transforming, and summarizing data efficiently."
+date: 2024-09-09
+draft: false
+---
+**Tidyverse** is a collection of R packages designed for data science, providing tools for data manipulation, visualization, and analysis. It includes packages like ggplot2 (for plotting), dplyr (for data manipulation), tidyr (for reshaping data), and more, all built around a consistent design philosophy.
+
+**dplyr** is a package within the tidyverse focused specifically on data manipulation. It provides a set of intuitive functions like filter(), select(), mutate(), summarize(), and arrange() to perform operations such as filtering, selecting, transforming, summarizing, and sorting data in a straightforward and readable way.
+
+```{r}
+library(dplyr)
+library(tidyverse)  # `tidyverse` includes `dplyr` and other helpful packages
+```
+
+```{r}
+#Create a dummy dataset
+data <- data.frame(
+  name = c("Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hannah", "Ian", "Jack"),
+  age = c(23, 35, 45, 29, 33, 50, 28, 41, 36, 27),
+  gender = c("F", "M", "M", "M", "F", "M", "F", "F", "M", "M"),
+  income = c(50000, 60000, 80000, 55000, 65000, 90000, 45000, 70000, 75000, 48000)
+)
+print(head(data))
+```
+## Filtering Data
+
+Use filter() to subset rows based on conditions.
+
+```{r}
+# Filter rows where age is greater than 30
+filtered_data <- data %>% 
+  filter(age > 30)
+filtered_data
+```
+## Selecting Columns
+
+Use select() to pick specific columns.
+```{r}
+# Select only the 'name' and 'age' columns
+selected_data <- data %>% 
+  select(name, age)
+
+selected_data
+```
+## Mutating (Adding New Columns)
+
+Use mutate() to create new columns or modify existing ones.
+```{r}
+# Add a new column 'age_in_5_years'
+mutated_data <- data %>% 
+  mutate(age_in_5_years = age + 5)
+mutated_data
+```
+## Arranging (Sorting) Data
+
+Use arrange() to sort data.
+```{r}
+# Sort data by age in descending order
+sorted_data <- data %>% 
+  arrange(desc(age))
+sorted_data
+```
+## Summarizing Data
+
+Use summarize() to calculate summary statistics, often with group_by() to aggregate data.
+```{r}
+# Calculate the average income
+average_income <- data %>% 
+  summarize(avg_income = mean(income, na.rm = TRUE))
+print(average_income)
+
+# Group by gender and calculate average income for each gender
+grouped_data <- data %>% 
+  group_by(gender) %>% 
+  summarize(avg_income = mean(income, na.rm = TRUE))
+print(grouped_data)
+```
+## Combining Operations
+
+You can chain multiple operations together using the pipe operator (%>%).
+```{r}
+# Filter for age greater than 30, select name and income, and sort by income
+combined_data <- data %>%
+  filter(age > 30) %>%
+  select(name, income) %>%
+  arrange(desc(income))
+print(combined_data)
+```
+## Other Helpful Functions
+
+- distinct(): Removes duplicate rows.
+- rename(): Renames columns.
+- join(): Combines two data frames by a common column.
+
+## Rename a column
+
+```{r}
+renamed_data <- data %>% rename(annual_income = income)
+print(renamed_data)
+```
+
+## Remove duplicates based on specific columns
+
+```{r}
+distinct_data <- data %>% distinct(name, .keep_all = TRUE)
+print(distinct_data)
+```
+
+### Summary
+
+Using tidyverse and dplyr, you can efficiently manipulate data by filtering, transforming, summarizing, and sorting it. These functions are concise, and work seamlessly together, allowing for clean and readable code.
+
+
+
+

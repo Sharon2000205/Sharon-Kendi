@@ -1,0 +1,102 @@
+---
+title: "Time Series Analysis"
+subtitle: ""
+excerpt: ""
+date: 2024-09-10
+author: "Kelvin Kiprono"
+draft: false
+tags:
+  - Statistical Data Analysis
+categories:
+- Time Series
+ 
+layout: single
+links: 
+- icon: door-open
+  icon_pack: fas
+  name: website
+  url: https://r-statistics.co/Time-Series-Analysis-With-R.html
+
+---
+Time series analysis is a vital statistical technique for examining data points collected or recorded at time intervals. In R, it involves identifying patterns, trends, seasonality, and cyclical behavior within a dataset. A typical time series analysis begins with data visualization to understand underlying trends, followed by decomposition to separate the data into trend, seasonal, and residual components. Ensuring stationarity is crucial, as non-stationary data can mislead results; this is often checked using the Augmented Dickey-Fuller (ADF) test. If the data are not stationary, differencing is applied to stabilize the mean and remove trends or seasonality. The autocorrelation function (ACF) and partial autocorrelation function (PACF) plots are then used to identify dependencies between observations. These steps help build models like ARIMA (AutoRegressive Integrated Moving Average), which are fitted to forecast future values and gain insights into temporal data behavior. R's powerful packages, such as forecast, tseries, and ggplot2, make it a preferred choice for comprehensive time series analysis.
+
+Let us explore sample data from base R
+
+```{r}
+data("austres")
+```
+This data represents the Quarterly Time Series of the Number of Australian Residents
+```{r warning=FALSE}
+library(dplyr)
+```
+
+```{r}
+glimpse(austres)
+```
+
+
+```{r warning=FALSE}
+library(tseries)
+
+```
+
+```{r}
+my_series <- ts(data = austres,start = 1971,end = 1993,frequency = 4)
+my_series
+```
+```{r}
+library(ggplot2)
+library(forecast)
+ autoplot(austres) +ggtitle("Number of Australian Residents from 1971 to 1993")
+
+
+```
+The plot indicates that there was a significant increase in population from the year 1971 to 1993.
+
+## Decompose the time series
+```{r}
+stl_result<- stl(austres,s.window = "periodic")
+autoplot(stl_result)
+```
+- S.window controls how fast the seasonal effects can change overtime.
+   - setting s.window = **periodic** forces seasonal effects to be identical across the year.
+- t.window controls how fast the trend can change overtime.
+
+## Stationarity check
+Using the Augmented Dickey-Fuller(ADF) to check if the series is stationary.If not ,we difference the data.
+ - If P-value > 0.05 , the series is non-stationary
+```{r}
+adf.test(austres)
+```
+```{r warning=FALSE}
+diff1 <- diff(austres,differences = 1)
+adf.test(diff1)
+diff2 <- diff(austres,differences = 2)
+adf.test(diff2)
+```
+```{r}
+autoplot(diff2) +ggtitle("Number of Australian Residents,difference = 2")
+
+```
+## Fitting an ARIMA Model
+```{r}
+library(forecast)
+fit <- auto.arima(diff2)
+summary(fit)
+```
+The ACF1 value of 0.052 indicates very low autocorrelation in the residuals, meaning this model has done well in capturing the time-series structure. In well-fitted models, residuals should resemble white noise (uncorrelated random errors).
+```{r}
+forecasted <- forecast(fit,h=5)
+forecasted
+```
+```{r}
+autoplot(forecasted)
+```
+
+
+```{r}
+checkresiduals(fit)
+```
+
+- The residuals show no major patterns or autocorrelation, which suggests the model fits well.
+- The residuals are roughly normally distributed, which supports the model’s adequacy.
