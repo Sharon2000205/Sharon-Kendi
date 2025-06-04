@@ -1,8 +1,8 @@
-baseURL = "https://kipronokelvin.netlify.app//"
+baseURL = "https://sharonkendi.netlify.app//"
 theme = "hugo-apero"
 languageCode = "en"
-title = "Personal website of Kelvin Kiprono"
-author = "Kelvin Kiprono"
+title = "Personal website of Sharon Kendi"
+author = "Sharon Kendi"
 copyright = "" # set to override the auto generated copyright using org info and now year
 googleAnalytics = ""
 disqusShortname = ""
@@ -28,9 +28,9 @@ enableEmoji = true
     style = "github"
     
 [params]
-  orgName = "Kiprono"
-  orgLocal = "Kelvin"
-  description = "Blog and portfolio of projects by Kelvin Kiprono,Statistician and Data Analyst."
+  orgName = "Kendi"
+  orgLocal = "Sharon"
+  description = "Blog and portfolio of projects by Sharon Kendi,Statistician and Data Analyst."
   favicon = "/img/img/Datascience.jpeg"
   logo = "/img/Datascience.jpeg"
   mainSections = ["blog", "project", "about"]
@@ -48,7 +48,7 @@ enableEmoji = true
   # use a built-in color theme
   # one of: forest / grayscale / peach / plum /
   #         poppy / sky / violet / water 
-  theme = "water"
+  theme = "peach"
   
   # or, leave theme empty & make your own palette
   # see docs at https://hugo-apero.netlify.app/blog/color-themes/
@@ -106,17 +106,17 @@ enableEmoji = true
 [menu]
   [[menu.header]]
     name = "About me"
-    title = "Kelvin Kiprono: About me"
+    title = "Sharon Kendi: About me"
     url = "/about/"
     weight = 8
   [[menu.header]]
     name = "Blog R"
-    title = "Kelvin Kiprono: Blog"
+    title = "Sharon Kendi: Blog"
     url = "/blog/"
     weight = 2
    [[menu.header]]
     name = "Projects"
-    title = "Kelvin Kiprono: Projects"
+    title = "Sharon Kendi: Projects"
     url = "/project/"
     weight = 3
     
@@ -128,12 +128,12 @@ enableEmoji = true
     weight = 1
   [[menu.footer]]
     name = "Contact"
-    title = "Kelvin Kiprono: Contact"
+    title = "Sharon Kendi: Contact"
     url = "/contact/"
     weight = 2
   [[menu.footer]]
     name = "About"
-    title = "Kelvin Kiprono: About me"
+    title = "Sharon Kendi: About me"
     url = "/about/"
     weight = 2
 
