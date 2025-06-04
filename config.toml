@@ -1,8 +1,8 @@
-baseURL = "https://sharonkendi.netlify.app//"
+baseURL = "https://kipronokelvin.netlify.app//"
 theme = "hugo-apero"
 languageCode = "en"
-title = "Personal website of Sharon Kendi"
-author = "Sharon Kendi"
+title = "Personal website of Kelvin Kiprono"
+author = "Kelvin Kiprono"
 copyright = "" # set to override the auto generated copyright using org info and now year
 googleAnalytics = ""
 disqusShortname = ""
@@ -28,12 +28,12 @@ enableEmoji = true
     style = "github"
     
 [params]
-  orgName = "Kendi"
-  orgLocal = "Sharon"
-  description = "A modern, beautiful, and easily configurable blog theme for Hugo."
-  favicon = "/img/favicon.ico"
-  logo = "/img/blogophonic-mark-dark.png"
-  mainSections = ["blog", "project", "talk"]
+  orgName = "Kiprono"
+  orgLocal = "Kelvin"
+  description = "Blog and portfolio of projects by Kelvin Kiprono,Statistician and Data Analyst."
+  favicon = "/img/img/Datascience.jpeg"
+  logo = "/img/Datascience.jpeg"
+  mainSections = ["blog", "project", "about"]
   navallcaps = true
   # show/hide social icons in site header & footer
   # configure social icons and links below in [[params.social]]
@@ -41,14 +41,14 @@ enableEmoji = true
   socialInFooter = true
   # Default image for social sharing and search engines. 
   # Place image file in `static` folder and specify image name here.
-  sharing_image = "/img/papillons.jpg"
+  sharing_image = "unicorn-megaphone.png"
   # Twitter username (without @). Used when a visitor shares your site on Twitter.
-  twitter = "apreshill"
+  twitter = "kigenke"
   
   # use a built-in color theme
   # one of: forest / grayscale / peach / plum /
   #         poppy / sky / violet / water 
-  theme = "violet"
+  theme = "water"
   
   # or, leave theme empty & make your own palette
   # see docs at https://hugo-apero.netlify.app/blog/color-themes/
@@ -62,11 +62,11 @@ enableEmoji = true
   # sans-serif options: Commissioner / Alegreya Sans / Metropolis
   # if you import your own fonts, name them here too
   customtextFontFamily = "Commissioner"
-  customheadingFontFamily = "Fraunces"
+  customheadingFontFamily = "EB Garamond"
   # alternatively, leave empty and select basic font options: sans-serif or serif
   # for more http://tachyons.io/docs/typography/font-family/
   textFontFamily = "sans-serif"
-  headingFontFamily = "sans-serif"
+  headingFontFamily = "serif"
   
   # Social icons may appear on homepage and in site header or footer
   # Configure show/hide above - add as many as you like below
@@ -76,23 +76,27 @@ enableEmoji = true
   [[params.social]]
       icon      = "github" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://github.com/apreshill/apero"
+      url       = "https://github.com/Kigke"
   [[params.social]]
       icon      = "facebook-square" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.facebook.com/hashtag/ap%C3%A9ro"
+      url       = "https://www.facebook.com/kigenkevin46/"
   [[params.social]]
       icon      = "instagram" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://www.instagram.com/explore/tags/apero/"
+      url       = "https://www.instagram.com/kigen_ke/"
   [[params.social]]
       icon      = "twitter" # icon name without the 'fa-'
       icon_pack = "fab"
-      url       = "https://twitter.com/hashtag/apéro"
+      url       = "https://twitter.com/Kigenke"
+   [[params.social]]
+      icon      = "linkedin" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://www.linkedin.com/in/kelvin-kiprono/"
   [[params.social]]
-      icon      = "rss" # icon name without the 'fa-'
+      icon      = "envelope" # icon name without the 'fa-'
       icon_pack = "fas"
-      url       = "/blog/index.xml"
+      url       = "https://mail.google.com/mail/u/0/#inbox"
 
 [taxonomies]
   category = "categories"
@@ -101,25 +105,20 @@ enableEmoji = true
 
 [menu]
   [[menu.header]]
-    name = "About"
-    title = "About Blogophonic"
+    name = "About me"
+    title = "Kelvin Kiprono: About me"
     url = "/about/"
-    weight = 1
+    weight = 8
   [[menu.header]]
-    name = "Blog"
-    title = "Blog"
+    name = "Blog R"
+    title = "Kelvin Kiprono: Blog"
     url = "/blog/"
     weight = 2
-  [[menu.header]]
+   [[menu.header]]
     name = "Projects"
-    title = "Project Portfolio"
+    title = "Kelvin Kiprono: Projects"
     url = "/project/"
     weight = 3
-  [[menu.header]]
-    name = "Talks"
-    title = "Talks"
-    url = "/talk/"
-    weight = 4
     
   # Configure footer  
   [[menu.footer]]
@@ -129,8 +128,13 @@ enableEmoji = true
     weight = 1
   [[menu.footer]]
     name = "Contact"
-    title = "Contact form"
+    title = "Kelvin Kiprono: Contact"
     url = "/contact/"
+    weight = 2
+  [[menu.footer]]
+    name = "About"
+    title = "Kelvin Kiprono: About me"
+    url = "/about/"
     weight = 2
 
 # see https://gohugo.io/about/hugo-and-gdpr/    
