@@ -5,7 +5,7 @@ description: ""
 date: 2024-09-18T12:27:33-06:00
 images:
   - img/visualization.gif
-image_left: true
+image_left: false
 text_align_left: true
 show_social_links: true # specify social accounts in site config
 show_action_link: true
